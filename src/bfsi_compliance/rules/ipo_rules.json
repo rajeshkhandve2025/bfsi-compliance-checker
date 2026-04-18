@@ -1,0 +1,106 @@
+{
+  "domain": "IPO (Initial Public Offering)",
+  "regulator": "SEBI (Securities and Exchange Board of India)",
+  "applicable_law": "SEBI (Issue of Capital and Disclosure Requirements) Regulations, 2018 (ICDR Regulations)",
+  "definition": "An IPO is when a private company offers its shares to the public for the first time to raise capital and get listed on a stock exchange (BSE/NSE).",
+  "simple_analogy": "A company is like a large cake. In an IPO, the owners sell some slices of that cake to the public. When you buy an IPO, you become a part-owner (shareholder) of that company.",
+  "types": [
+    {
+      "name": "Book Building IPO",
+      "description": "Price is discovered through bidding in a price band (e.g. ₹100-110). Investors bid at any price within the band. Final issue price is determined by demand. Most common type.",
+      "price_band": "Upper limit cannot exceed 120% of lower limit"
+    },
+    {
+      "name": "Fixed Price IPO",
+      "description": "Price is fixed in advance. Investors apply at the announced price. Less common."
+    },
+    {
+      "name": "SME IPO",
+      "description": "IPO by Small and Medium Enterprises listed on BSE SME or NSE Emerge platform. Smaller companies, higher risk."
+    }
+  ],
+  "key_terms": {
+    "Price Band": "The range within which investors can bid. E.g. ₹200-210 means you can bid at any price between ₹200 and ₹210.",
+    "Cut-off Price": "You bid at 'cut-off' to indicate you accept whatever final price SEBI determines. Recommended for retail investors.",
+    "Lot Size": "Minimum number of shares you must apply for. E.g. lot size of 50 means minimum application = 50 shares × issue price.",
+    "Subscription": "How many times an IPO is applied for vs shares available. '5x subscribed' means 5 times more demand than supply.",
+    "Oversubscription": "When IPO receives more applications than shares available. Allotment is done by lottery for retail investors.",
+    "GMP (Grey Market Premium)": "Unofficial market price of IPO shares before listing. NOT regulated by SEBI. Purely indicative and speculative.",
+    "Anchor Investor": "Institutional investor allocated shares before IPO opens. Positive anchor allocation signals confidence in the issue.",
+    "DRHP": "Draft Red Herring Prospectus — the detailed IPO document filed with SEBI. Contains all material information about the company.",
+    "RHP": "Red Herring Prospectus — final prospectus with issue price/price band filled in.",
+    "Listing Date": "The day shares start trading on the stock exchange after IPO allotment.",
+    "Listing Gains": "Profit if share price on listing day is higher than issue price. Not guaranteed.",
+    "Basis of Allotment": "Document published after IPO closure showing how shares were distributed across applicants.",
+    "ASBA": "Application Supported by Blocked Amount — your bank account is blocked (not debited) until allotment. If not allotted, money is unblocked automatically.",
+    "OFS": "Offer for Sale — existing shareholders selling their shares in the IPO. Company does NOT receive this money; it goes to selling shareholders.",
+    "Fresh Issue": "Company issuing new shares to raise fresh capital for the business.",
+    "IPO Proceeds Use": "Must be disclosed in DRHP — typically for capex, debt repayment, working capital, acquisitions."
+  },
+  "investor_categories": [
+    {
+      "category": "RII (Retail Individual Investor)",
+      "eligibility": "Any Indian individual investor",
+      "application_limit": "Up to ₹2 lakh per application",
+      "reservation": "Minimum 35% of IPO shares reserved for retail investors",
+      "allotment": "Lottery-based if oversubscribed — every applicant has equal chance of getting 1 lot",
+      "tip": "Apply at cut-off price for best chance of allotment"
+    },
+    {
+      "category": "NII / HNI (Non-Institutional Investor / High Net Worth Individual)",
+      "eligibility": "Indian individuals applying above ₹2 lakh",
+      "sub_categories": {
+        "sNII": "₹2 lakh to ₹10 lakh — 1/3rd of NII portion reserved",
+        "bNII": "Above ₹10 lakh — 2/3rd of NII portion reserved"
+      },
+      "reservation": "Minimum 15% of shares",
+      "allotment": "Proportional if oversubscribed (not lottery)"
+    },
+    {
+      "category": "QIB (Qualified Institutional Buyer)",
+      "eligibility": "Mutual funds, FIIs, banks, insurance companies, etc.",
+      "reservation": "Maximum 50% of shares",
+      "allotment": "Discretionary by merchant banker"
+    },
+    {
+      "category": "Employee Reservation",
+      "eligibility": "Employees of the company going public",
+      "benefit": "Often offered at a discount to issue price"
+    },
+    {
+      "category": "Shareholder Reservation",
+      "eligibility": "Existing shareholders of the promoter group / parent company",
+      "benefit": "Separate allocation; often at discount"
+    }
+  ],
+  "how_to_apply": [
+    "Step 1: Ensure you have a Demat account + trading account + bank account (all three linked)",
+    "Step 2: Complete KYC if not done",
+    "Step 3: Read the RHP to understand the company's business, financials, and risk factors",
+    "Step 4: Log into your broker's app or bank's net banking (ASBA)",
+    "Step 5: Search for the IPO, enter lot quantity and price (choose cut-off for retail)",
+    "Step 6: Funds are blocked in your bank account via ASBA",
+    "Step 7: Wait for allotment (typically 6 days after IPO closes)",
+    "Step 8: Check allotment status on BSE/NSE website or registrar's website",
+    "Step 9: If allotted, shares credited to Demat account on T+1 before listing; refunds processed for unallotted applications",
+    "Step 10: Shares start trading on listing day"
+  ],
+  "sebi_investor_protections": [
+    "Mandatory 6-day timeline from IPO close to listing",
+    "ASBA ensures money is not debited until allotment — no risk of fund misuse",
+    "25% of promoter shares locked in for 18 months post-IPO",
+    "Anchor investors locked in for 30-90 days",
+    "SEBI reviews DRHP and issues observations before IPO can open",
+    "Price band upper limit restricted to 120% of lower limit for book building",
+    "Refund within 15 days for unallotted applications (interest payable if delayed)"
+  ],
+  "risks": [
+    "Listing price can be below issue price — listing loss possible",
+    "GMP is speculative — do not base investment decisions on GMP",
+    "Overvalued IPOs may underperform in the long run even if they list at a premium",
+    "Company may not use IPO proceeds as stated",
+    "SME IPOs are higher risk due to smaller, less-established businesses",
+    "Lock-in periods mean promoters cannot sell immediately, but this does not guarantee price stability"
+  ],
+  "disclaimer": "IPO investments are subject to market risks. Past listing performance is not indicative of future returns. Read the Red Herring Prospectus carefully before applying."
+}

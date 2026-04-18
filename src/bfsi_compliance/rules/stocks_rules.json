@@ -1,0 +1,117 @@
+{
+  "domain": "Stock Market & Equity Investing",
+  "regulator": "SEBI (Securities and Exchange Board of India)",
+  "exchanges": ["BSE (Bombay Stock Exchange)", "NSE (National Stock Exchange)"],
+  "applicable_law": "SEBI Act, 1992; Securities Contracts (Regulation) Act, 1956; Depositories Act, 1996",
+  "basics": {
+    "What is a Stock": "A stock (also called share or equity) represents a unit of ownership in a company. When you buy a share of Infosys, you become a part-owner of Infosys.",
+    "Why Companies List": "Companies list on stock exchanges to raise capital from the public for business expansion, debt repayment, or other purposes.",
+    "How Price is Determined": "Stock price is determined by supply and demand. If more people want to buy than sell, price rises. If more want to sell, price falls.",
+    "BSE": "Bombay Stock Exchange — Asia's oldest exchange (est. 1875). Benchmark index: SENSEX (30 largest companies).",
+    "NSE": "National Stock Exchange — India's largest by trading volume. Benchmark index: NIFTY 50 (50 largest companies).",
+    "SENSEX": "Index of 30 largest, most actively traded companies on BSE. Represents ~45% of BSE's total market capitalisation.",
+    "NIFTY 50": "Index of 50 largest companies on NSE across 13 sectors. Considered the benchmark for Indian equity markets.",
+    "Demat Account": "Electronic account that holds your shares in dematerialised (digital) form. Mandatory to invest in stocks. Held with NSDL or CDSL (depositories).",
+    "Trading Account": "Account through which you buy and sell shares on the stock exchange. Linked to your Demat and bank account.",
+    "SEBI Registration": "All brokers must be SEBI-registered. Check SEBI's website before choosing a broker."
+  },
+  "market_concepts": {
+    "Bull Market": "Period when stock prices are rising or expected to rise. Investor sentiment is optimistic.",
+    "Bear Market": "Period when stock prices fall 20% or more from recent highs. Investor sentiment is pessimistic.",
+    "Market Capitalisation": {
+      "definition": "Total market value of a company = Share Price × Total Shares Outstanding",
+      "categories": {
+        "Large Cap": "Top 100 companies by market cap. More stable, less volatile.",
+        "Mid Cap": "101st to 250th companies. Higher growth potential, moderate risk.",
+        "Small Cap": "251st company onwards. Highest growth potential, highest risk."
+      }
+    },
+    "Circuit Breaker": "SEBI-mandated halt in trading when index falls/rises too sharply. Prevents panic-driven crashes.",
+    "Upper/Lower Circuit": "Maximum price movement allowed in a day for individual stocks (typically ±5%, ±10%, ±20%). Prevents manipulation.",
+    "52-Week High/Low": "Highest and lowest price a stock has traded at in the past 52 weeks. Used as reference points by traders.",
+    "Volume": "Number of shares traded in a period. High volume confirms price moves; low volume moves are less reliable.",
+    "Dividend": "A portion of company profits distributed to shareholders. Expressed as ₹ per share or as a percentage of face value.",
+    "Bonus Shares": "Free additional shares given to existing shareholders in proportion to their holdings. Price adjusts proportionally.",
+    "Stock Split": "Company increases number of shares by dividing existing shares. E.g. 1:2 split — 1 share becomes 2 shares at half the price. Total value unchanged.",
+    "Rights Issue": "Company offers additional shares to existing shareholders at a discount. Shareholders can subscribe or renounce.",
+    "Buyback": "Company buys back its own shares from the market — reduces outstanding shares, often signals undervaluation."
+  },
+  "order_types": {
+    "Market Order": "Buy/sell at current best available price. Immediate execution but price may differ slightly from displayed price.",
+    "Limit Order": "Buy/sell only at a specified price or better. May not execute if price never reaches your limit.",
+    "Stop Loss Order": "Automatically sells your shares if price falls to a specified level. Protects against large losses.",
+    "Stop Loss Market": "When stop loss price is hit, order becomes a market order — sells at best available price.",
+    "Stop Loss Limit": "When stop loss price is hit, order becomes a limit order — may not execute if price gaps down.",
+    "GTT (Good Till Triggered)": "Order stays active for up to 1 year until triggered. Available on most modern broking apps.",
+    "CNC (Cash and Carry)": "Delivery-based order for holding shares in your Demat account. For investors.",
+    "MIS (Margin Intraday Square-off)": "Intraday trading order — must be squared off (closed) before market close."
+  },
+  "trading_types": {
+    "Delivery / Investing": "Buy shares and hold them in your Demat account for medium to long term. You become a shareholder.",
+    "Intraday Trading": "Buy and sell on the same day. No delivery. Profit/loss from price difference. High risk.",
+    "F&O (Futures and Options)": {
+      "definition": "Derivative contracts based on underlying stocks or indices. High leverage, very high risk.",
+      "futures": "Agreement to buy/sell at a future date at today's price.",
+      "options": "Right (not obligation) to buy/sell at a specified price.",
+      "warning": "SEBI data shows 89% of F&O traders lose money. Not recommended for beginners.",
+      "sebi_requirement": "Must disclose income proof to trade F&O. Minimum net worth criteria may apply."
+    }
+  },
+  "fundamental_analysis": {
+    "definition": "Evaluating a company's intrinsic value based on financial health, business model, and growth prospects.",
+    "key_metrics": {
+      "EPS (Earnings Per Share)": "Net Profit / Total Shares. Higher EPS = more profitable company.",
+      "P/E Ratio (Price to Earnings)": "Share Price / EPS. Indicates how much investors pay per ₹1 of earnings. Compare within same sector.",
+      "P/B Ratio (Price to Book)": "Share Price / Book Value per Share. P/B < 1 may indicate undervaluation.",
+      "ROE (Return on Equity)": "Net Profit / Shareholders' Equity. Measures how efficiently management uses equity. >15% is generally good.",
+      "Debt to Equity Ratio": "Total Debt / Shareholders' Equity. Lower is safer. >2 may indicate high financial risk.",
+      "Dividend Yield": "Annual Dividend / Share Price × 100. Higher yield = more income, but verify company's consistency.",
+      "Revenue Growth": "Year-on-year growth in company's revenue. Consistent growth is a positive sign."
+    }
+  },
+  "settlement": {
+    "T+1 Settlement": "As of January 2023, India moved to T+1 (Trade plus 1 day) settlement for all stocks. Shares credited to Demat account and money credited within 1 business day of trade.",
+    "Previous": "Earlier was T+2. India is among the first major markets to implement T+1 settlement."
+  },
+  "sebi_investor_protections": [
+    "Investor Protection Fund (IPF): Compensates investors if a SEBI-registered broker defaults",
+    "Mandatory margin requirements to prevent over-leveraging",
+    "Peak margin rules: brokers cannot offer more than permitted leverage",
+    "Annual KYC verification for trading accounts",
+    "Demat account nomination mandatory (SEBI circular 2022)",
+    "Inactive account: broker must send annual statement",
+    "SCORES (SEBI Complaint Redress System): file complaints at scores.sebi.gov.in",
+    "Mandatory risk disclosure document for all new traders",
+    "P&L statement: brokers must provide annual P&L to all clients"
+  ],
+  "taxation": {
+    "Short Term Capital Gain (STCG)": {
+      "condition": "Shares sold within 12 months of purchase",
+      "tax_rate": "20% (revised from 15% — Finance Act 2024, effective 23 July 2024)"
+    },
+    "Long Term Capital Gain (LTCG)": {
+      "condition": "Shares sold after 12 months of purchase",
+      "tax_rate": "12.5% on gains above ₹1.25 lakh per year (revised — Finance Act 2024)",
+      "exemption": "₹1.25 lakh LTCG per financial year is exempt from tax"
+    },
+    "Securities Transaction Tax (STT)": "Charged on every buy/sell transaction on exchanges. 0.1% on delivery trades.",
+    "Dividend Income": "Taxed at your income tax slab rate. TDS @10% if dividend > ₹5,000 from a single company."
+  },
+  "common_mistakes": [
+    "Investing based on tips from WhatsApp/social media without research",
+    "Investing all money in a single stock — always diversify",
+    "Panic selling during market corrections — corrections are normal",
+    "Trading in F&O without understanding risks",
+    "Confusing short-term trading with investing",
+    "Not having a stop-loss strategy",
+    "Chasing momentum stocks at all-time highs without valuation check",
+    "Ignoring fundamentals and investing purely on price movement"
+  ],
+  "where_to_learn": [
+    "NSE Academy (nseindia.com/education)",
+    "BSE Institute (bsebti.com)",
+    "SEBI Investor Education (investor.sebi.gov.in)",
+    "NISM (National Institute of Securities Markets) — nism.ac.in"
+  ],
+  "disclaimer": "Stock market investments are subject to market risks. This information is educational only and does not constitute investment advice. Consult a SEBI-registered investment advisor before making investment decisions."
+}

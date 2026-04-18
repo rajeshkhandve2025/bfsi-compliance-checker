@@ -1,0 +1,147 @@
+{
+  "domain": "Insurance",
+  "regulator": "IRDAI (Insurance Regulatory and Development Authority of India)",
+  "applicable_law": "Insurance Act, 1938; IRDAI Act, 1999",
+  "types": [
+    {
+      "id": "INS-LIFE-TERM",
+      "category": "Life Insurance",
+      "name": "Term Insurance",
+      "definition": "Pure protection plan. Pays the sum assured to the nominee only if the insured dies during the policy term. No maturity benefit if the insured survives.",
+      "best_for": "Primary breadwinners who want maximum coverage at minimum cost.",
+      "key_features": [
+        "Lowest premium among life insurance products",
+        "Sum assured can be ₹50 lakh to several crores",
+        "Policy terms: 10 to 40 years",
+        "Riders available: accidental death, critical illness, waiver of premium"
+      ],
+      "example": "A 30-year-old can get ₹1 crore cover for ~₹8,000-12,000 per year.",
+      "tax_benefit": "Premium up to ₹1.5 lakh under Section 80C; death benefit tax-free under Section 10(10D)"
+    },
+    {
+      "id": "INS-LIFE-ENDOWMENT",
+      "category": "Life Insurance",
+      "name": "Endowment Plan",
+      "definition": "Combination of insurance and savings. Pays sum assured on death OR maturity — whichever is earlier.",
+      "best_for": "Risk-averse investors wanting guaranteed returns with life cover.",
+      "key_features": [
+        "Higher premium than term insurance",
+        "Guaranteed maturity benefit",
+        "Bonus (reversionary + terminal) declared annually by insurer",
+        "Surrender value available after 3 years"
+      ],
+      "caution": "Returns are typically 4-6% — lower than PPF or mutual funds. Primarily for protection, not wealth creation."
+    },
+    {
+      "id": "INS-LIFE-ULIP",
+      "category": "Life Insurance",
+      "name": "ULIP (Unit Linked Insurance Plan)",
+      "definition": "Combines life insurance with market-linked investment. Premium is split between life cover and investment in equity/debt funds.",
+      "best_for": "Long-term investors (10+ years) who want insurance + market-linked returns.",
+      "key_features": [
+        "5-year lock-in period (IRDAI mandate)",
+        "Fund switching allowed between equity, debt, balanced options",
+        "Charges: premium allocation, policy admin, fund management, mortality",
+        "After 5 years: partial withdrawals allowed"
+      ],
+      "tax_benefit": "Premium up to ₹2.5 lakh/year: tax-free maturity under Section 10(10D). Above ₹2.5 lakh premium: maturity taxable.",
+      "caution": "High charges in initial years. Compare fund performance and total charges before buying."
+    },
+    {
+      "id": "INS-LIFE-WHOLELIFE",
+      "category": "Life Insurance",
+      "name": "Whole Life Insurance",
+      "definition": "Provides life cover for the entire lifetime (typically till age 99 or 100). Premium paying term is limited (e.g. 20 years) but cover continues.",
+      "best_for": "Estate planning, leaving legacy for dependents."
+    },
+    {
+      "id": "INS-HEALTH-INDIVIDUAL",
+      "category": "Health Insurance",
+      "name": "Individual Health Insurance",
+      "definition": "Covers hospitalisation, surgery, ICU, daycare procedures for one individual.",
+      "key_features": [
+        "Sum insured: ₹2 lakh to ₹2 crore",
+        "Cashless treatment at network hospitals",
+        "Pre and post-hospitalisation expenses covered",
+        "Waiting period: 30 days initial; 2-4 years for pre-existing diseases",
+        "No-claim bonus: 5-50% increase in sum insured for claim-free years"
+      ],
+      "tax_benefit": "Premium up to ₹25,000 for self/spouse/children under Section 80D; ₹50,000 for senior citizen parents."
+    },
+    {
+      "id": "INS-HEALTH-FAMILY",
+      "category": "Health Insurance",
+      "name": "Family Floater Health Insurance",
+      "definition": "Single policy covering entire family (self, spouse, children). Sum insured is shared across all members.",
+      "best_for": "Families where all members are young and healthy.",
+      "caution": "If one member has a major claim, remaining sum insured reduces for others in that year."
+    },
+    {
+      "id": "INS-HEALTH-CRITICAL",
+      "category": "Health Insurance",
+      "name": "Critical Illness Insurance",
+      "definition": "Lump sum payout on diagnosis of covered critical illnesses (cancer, heart attack, stroke, kidney failure, etc.).",
+      "covered_illnesses_typically": ["Cancer", "Heart Attack", "Stroke", "Kidney Failure", "Major Organ Transplant", "Coronary Artery Bypass Surgery"],
+      "key_feature": "Pays lump sum regardless of actual hospital bills — can be used for treatment, income replacement, or any purpose."
+    },
+    {
+      "id": "INS-GENERAL-MOTOR",
+      "category": "General Insurance",
+      "name": "Motor Insurance",
+      "definition": "Insurance for vehicles. Mandatory by law under Motor Vehicles Act.",
+      "types": {
+        "Third Party": "Mandatory by law. Covers damage/injury to third parties. Does NOT cover your own vehicle.",
+        "Comprehensive": "Covers third-party liability + own damage + theft. Recommended for all vehicles."
+      },
+      "key_features": [
+        "IDV (Insured Declared Value): market value of vehicle — this is maximum claim amount",
+        "NCB (No Claim Bonus): discount up to 50% on own-damage premium for claim-free years",
+        "Zero Depreciation add-on: full claim without depreciation deduction — recommended for new cars"
+      ]
+    },
+    {
+      "id": "INS-GENERAL-HOME",
+      "category": "General Insurance",
+      "name": "Home Insurance",
+      "definition": "Covers structure and/or contents of home against fire, theft, flood, earthquake, and other perils.",
+      "types": {
+        "Structure Insurance": "Covers the building itself",
+        "Contents Insurance": "Covers furniture, electronics, jewellery inside the home"
+      }
+    },
+    {
+      "id": "INS-GENERAL-TRAVEL",
+      "category": "General Insurance",
+      "name": "Travel Insurance",
+      "definition": "Short-term insurance for domestic or international travel.",
+      "covers": ["Medical emergencies abroad", "Trip cancellation/interruption", "Baggage loss/delay", "Flight delay", "Passport loss"]
+    }
+  ],
+  "key_concepts": {
+    "Sum Assured": "The guaranteed amount the insurer will pay on a claim or maturity. Choose based on income replacement need (typically 10-15x annual income for life insurance).",
+    "Premium": "The amount you pay to keep the insurance policy active. Can be annual, half-yearly, quarterly, or monthly.",
+    "Policy Term": "Duration of the insurance cover.",
+    "Claim Settlement Ratio (CSR)": "Percentage of claims settled by an insurer out of total claims received. Higher is better. IRDAI publishes this annually. Look for >95%.",
+    "Free Look Period": "15 days (30 days for distance marketing policies) to review a new policy. Full refund if cancelled within free look period.",
+    "Surrender Value": "Amount you receive if you cancel a life insurance policy before maturity. Available only after paying premiums for minimum 3 years.",
+    "Grace Period": "Extra time (15-30 days) to pay premium after due date without policy lapsing.",
+    "Rider": "Add-on benefit attached to a base insurance policy for additional coverage (e.g. accidental death rider, critical illness rider).",
+    "Nominee": "Person designated to receive the insurance payout upon the insured's death.",
+    "Pre-existing Disease (PED)": "Any illness/condition that existed before buying health insurance. Usually covered after a waiting period of 2-4 years."
+  },
+  "irdai_regulations": {
+    "know_your_customer": "Full KYC mandatory for policies above ₹1 lakh annual premium.",
+    "claim_settlement_timeline": "Insurers must settle claims within 30 days of receiving all documents. Delayed claims accrue interest.",
+    "grievance_redressal": "Insurer must resolve complaints within 15 days. Escalate to Insurance Ombudsman if unresolved.",
+    "insurance_ombudsman": "Free dispute resolution for claims up to ₹50 lakh. 17 ombudsman offices across India.",
+    "mis_selling_protection": "Agents must explain policy terms clearly. Free look period protects against mis-selling.",
+    "bima_sugam": "IRDAI's upcoming digital platform for buying, servicing, and claiming insurance online (one-stop marketplace)."
+  },
+  "how_to_choose": [
+    "Life Insurance: Buy pure term for maximum coverage at minimum cost. Coverage = 10-15x annual income.",
+    "Health Insurance: Buy individual or family floater of at least ₹5-10 lakh. Top-up plan for additional cover.",
+    "Motor Insurance: Comprehensive + Zero Depreciation add-on for new vehicles.",
+    "Check Claim Settlement Ratio (>95%) and solvency ratio (>150%) of the insurer before buying."
+  ],
+  "disclaimer": "Insurance is a subject matter of solicitation. Please read the policy document carefully before buying. Terms and conditions apply."
+}
