@@ -1,0 +1,811 @@
+# ==============================================================================
+# BFSI Public Advisor — Authoritative Source Catalog
+# ==============================================================================
+# Purpose : Grounding schema for a public BFSI chatbot. Every answer produced
+#           by the bot MUST cite at least one `primary` source from this file.
+# Scope   : India (IN jurisdiction), FY 2025-26 (Finance Act 2024)
+# License : Use freely; verify URLs before each release
+# ==============================================================================
+
+meta:
+  version: "1.0.0"
+  last_updated: "2026-04-19"
+  jurisdiction: "IN"
+  fiscal_year: "FY 2025-26"
+  schema_spec: "./bfsi_schema.json"
+
+# ==============================================================================
+# SECTION 1 — SOURCE CATALOG
+# ==============================================================================
+# Each source has a trust_level:
+#   primary     = government regulator, statute, SRO recognised by regulator
+#   secondary   = industry body, exchange-published data, regulated service
+#   reference   = educational institution material
+# ==============================================================================
+
+sources:
+
+  # -------- Securities / Capital Markets --------
+  sebi:
+    name: "Securities and Exchange Board of India"
+    authority_type: "regulator"
+    trust_level: "primary"
+    statute_basis: "SEBI Act, 1992"
+    base_url: "https://www.sebi.gov.in"
+    domains: [mutual_funds, stocks, ipo]
+    key_pages:
+      regulations: "https://www.sebi.gov.in/sebiweb/home/HomeAction.do?doListing=yes&sid=1&ssid=3"
+      circulars: "https://www.sebi.gov.in/sebiweb/home/HomeAction.do?doListing=yes&sid=1&ssid=7"
+      investor_portal: "https://investor.sebi.gov.in"
+      scores: "https://scores.sebi.gov.in"
+    citation_templates:
+      formal: "Securities and Exchange Board of India. {document_title}. Retrieved {access_date} from {url}"
+      inline: "(SEBI, {year})"
+      chatbot: "Source: SEBI — {document_title} [{url}]"
+
+  amfi:
+    name: "Association of Mutual Funds in India"
+    authority_type: "sro"
+    parent_regulator: "sebi"
+    trust_level: "primary"
+    base_url: "https://www.amfiindia.com"
+    domains: [mutual_funds]
+    citation_templates:
+      formal: "Association of Mutual Funds in India. {document_title}. Retrieved {access_date} from {url}"
+      inline: "(AMFI, {year})"
+      chatbot: "Source: AMFI — {document_title} [{url}]"
+    data_endpoints:
+      - id: nav_all
+        description: "Daily NAV of all open-ended schemes"
+        url: "https://portal.amfiindia.com/spages/NAVAll.txt"
+        format: "pipe_delimited_text"
+        columns: [scheme_code, isin_growth, isin_div_reinvest, scheme_name, nav, date]
+        update_frequency: "daily_post_market_close"
+        auth_required: false
+        terms: "public_free"
+      - id: nav_open
+        description: "NAV of open-ended schemes only"
+        url: "https://portal.amfiindia.com/spages/NAVOpen.txt"
+        format: "pipe_delimited_text"
+      - id: nav_history
+        description: "Historical NAV lookup (max 90-day window per query)"
+        url: "https://portal.amfiindia.com/NavHistoryReport_Po.aspx"
+        auth_required: false
+        rate_limit: "90_days_per_query"
+
+  nse:
+    name: "National Stock Exchange of India"
+    authority_type: "exchange"
+    parent_regulator: "sebi"
+    trust_level: "secondary"
+    base_url: "https://www.nseindia.com"
+    domains: [stocks, ipo]
+    key_pages:
+      upcoming_ipo: "https://www.nseindia.com/market-data/all-upcoming-issues-ipo"
+      circulars: "https://www.nseindia.com/resources/exchange-communication-circulars"
+    notes: "Rate-limited and has bot detection; use for reference, not polling."
+
+  bse:
+    name: "Bombay Stock Exchange"
+    authority_type: "exchange"
+    parent_regulator: "sebi"
+    trust_level: "secondary"
+    base_url: "https://www.bseindia.com"
+    domains: [stocks, ipo]
+    key_pages:
+      public_issues: "https://www.bseindia.com/markets/PublicIssues/IPOIssues_new.aspx"
+
+  nsdl:
+    name: "National Securities Depository Limited"
+    authority_type: "depository"
+    parent_regulator: "sebi"
+    trust_level: "secondary"
+    base_url: "https://nsdl.co.in"
+    domains: [stocks, ipo]
+
+  cdsl:
+    name: "Central Depository Services Limited"
+    authority_type: "depository"
+    parent_regulator: "sebi"
+    trust_level: "secondary"
+    base_url: "https://www.cdslindia.com"
+    domains: [stocks, ipo]
+
+  mf_central:
+    name: "MF Central"
+    authority_type: "service_portal"
+    parent_regulator: "sebi"
+    trust_level: "secondary"
+    base_url: "https://mfcentral.com"
+    domains: [mutual_funds]
+    notes: "Joint CAMS + KFintech investor portal"
+
+  nism:
+    name: "National Institute of Securities Markets"
+    authority_type: "education"
+    parent_regulator: "sebi"
+    trust_level: "reference"
+    base_url: "https://www.nism.ac.in"
+    domains: [mutual_funds, stocks, ipo]
+
+  ncfe:
+    name: "National Centre for Financial Education"
+    authority_type: "education"
+    parent_regulator: "multi_regulator"
+    trust_level: "reference"
+    base_url: "https://www.ncfe.org.in"
+    domains: [mutual_funds, stocks, insurance, income_tax]
+    notes: "Joint RBI/SEBI/IRDAI/PFRDA initiative"
+
+  # -------- Insurance --------
+  irdai:
+    name: "Insurance Regulatory and Development Authority of India"
+    authority_type: "regulator"
+    trust_level: "primary"
+    statute_basis: "IRDA Act, 1999"
+    base_url: "https://irdai.gov.in"
+    domains: [insurance]
+    key_pages:
+      regulations: "https://irdai.gov.in/regulations"
+      circulars: "https://irdai.gov.in/circulars"
+    citation_templates:
+      formal: "Insurance Regulatory and Development Authority of India. {document_title}. Retrieved {access_date} from {url}"
+      chatbot: "Source: IRDAI — {document_title} [{url}]"
+
+  bima_bharosa:
+    name: "Bima Bharosa (IRDAI Grievance Portal)"
+    authority_type: "regulator_portal"
+    parent_regulator: "irdai"
+    trust_level: "primary"
+    base_url: "https://bimabharosa.irdai.gov.in"
+    domains: [insurance]
+    purpose: "grievance_redressal"
+
+  policyholder_gov:
+    name: "IRDAI Policyholder Education Portal"
+    authority_type: "regulator_portal"
+    parent_regulator: "irdai"
+    trust_level: "primary"
+    base_url: "https://policyholder.gov.in"
+    domains: [insurance]
+    purpose: "consumer_education"
+
+  cio:
+    name: "Council for Insurance Ombudsmen"
+    authority_type: "statutory_body"
+    parent_regulator: "irdai"
+    trust_level: "primary"
+    base_url: "https://www.cioins.co.in"
+    domains: [insurance]
+    purpose: "dispute_resolution"
+
+  iib:
+    name: "Insurance Information Bureau of India"
+    authority_type: "sro"
+    parent_regulator: "irdai"
+    trust_level: "primary"
+    base_url: "https://iib.gov.in"
+    domains: [insurance]
+    purpose: "industry_data"
+
+  life_insurance_council:
+    name: "Life Insurance Council"
+    authority_type: "industry_body"
+    parent_regulator: "irdai"
+    trust_level: "secondary"
+    base_url: "https://www.lifeinscouncil.org"
+    domains: [insurance]
+
+  general_insurance_council:
+    name: "General Insurance Council"
+    authority_type: "industry_body"
+    parent_regulator: "irdai"
+    trust_level: "secondary"
+    base_url: "https://www.gicouncil.in"
+    domains: [insurance]
+
+  # -------- Income Tax --------
+  income_tax_india:
+    name: "Income Tax Department (Information Portal)"
+    authority_type: "government"
+    trust_level: "primary"
+    base_url: "https://incometaxindia.gov.in"
+    domains: [income_tax]
+    key_pages:
+      acts_rules: "https://incometaxindia.gov.in/Pages/acts/income-tax-act.aspx"
+      notifications: "https://incometaxindia.gov.in/Pages/communications/notifications.aspx"
+      circulars: "https://incometaxindia.gov.in/Pages/communications/circulars.aspx"
+      forms: "https://incometaxindia.gov.in/Pages/downloads/most-used-forms.aspx"
+    citation_templates:
+      formal: "Income Tax Department, Government of India. {document_title}. Retrieved {access_date} from {url}"
+      chatbot: "Source: Income Tax Dept — {document_title} [{url}]"
+
+  income_tax_filing:
+    name: "Income Tax e-Filing Portal"
+    authority_type: "government"
+    parent: "income_tax_india"
+    trust_level: "primary"
+    base_url: "https://www.incometax.gov.in"
+    domains: [income_tax]
+    purpose: "itr_filing_and_services"
+
+  cbdt:
+    name: "Central Board of Direct Taxes"
+    authority_type: "government"
+    trust_level: "primary"
+    base_url: "https://incometaxindia.gov.in/Pages/about-us/central-board-of-direct-taxes.aspx"
+    domains: [income_tax]
+
+  mof:
+    name: "Ministry of Finance, Government of India"
+    authority_type: "government"
+    trust_level: "primary"
+    base_url: "https://finmin.nic.in"
+    domains: [income_tax, compliance]
+    key_pages:
+      budget: "https://www.indiabudget.gov.in"
+
+  india_code:
+    name: "India Code (Consolidated Statutes)"
+    authority_type: "government"
+    trust_level: "primary"
+    base_url: "https://www.indiacode.nic.in"
+    domains: [income_tax, compliance, insurance, stocks, mutual_funds, ipo]
+    notes: "Authoritative consolidated text of Indian statutes"
+
+  traces:
+    name: "TDS Reconciliation Analysis and Correction Enabling System"
+    authority_type: "government"
+    parent: "cbdt"
+    trust_level: "primary"
+    base_url: "https://www.tdscpc.gov.in"
+    domains: [income_tax]
+
+  # -------- Compliance / Cyber --------
+  rbi:
+    name: "Reserve Bank of India"
+    authority_type: "regulator"
+    trust_level: "primary"
+    statute_basis: "RBI Act, 1934"
+    base_url: "https://www.rbi.org.in"
+    domains: [compliance, banking]
+    key_pages:
+      notifications: "https://www.rbi.org.in/Scripts/NotificationUser.aspx"
+      master_directions: "https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx"
+    citation_templates:
+      formal: "Reserve Bank of India. {document_title}. Retrieved {access_date} from {url}"
+      chatbot: "Source: RBI — {document_title} [{url}]"
+
+  cert_in:
+    name: "Indian Computer Emergency Response Team"
+    authority_type: "government"
+    trust_level: "primary"
+    statute_basis: "IT Act, 2000 Section 70B"
+    base_url: "https://www.cert-in.org.in"
+    domains: [compliance]
+    key_pages:
+      advisories: "https://www.cert-in.org.in/s2cMainServlet?pageid=PUBVLNOTES01"
+      incident_reporting: "https://www.cert-in.org.in/s2cMainServlet?pageid=INCIDENTREP"
+
+  meity:
+    name: "Ministry of Electronics and Information Technology"
+    authority_type: "government"
+    trust_level: "primary"
+    base_url: "https://www.meity.gov.in"
+    domains: [compliance]
+
+  pci_ssc:
+    name: "PCI Security Standards Council"
+    authority_type: "standards_body"
+    trust_level: "primary"
+    jurisdiction: "international"
+    base_url: "https://www.pcisecuritystandards.org"
+    domains: [compliance]
+    notes: "Not a government body; standard is contractually enforced by card networks"
+
+  npci:
+    name: "National Payments Corporation of India"
+    authority_type: "sro"
+    parent_regulator: "rbi"
+    trust_level: "primary"
+    base_url: "https://www.npci.org.in"
+    domains: [compliance, banking]
+
+  nciipc:
+    name: "National Critical Information Infrastructure Protection Centre"
+    authority_type: "government"
+    trust_level: "primary"
+    base_url: "https://nciipc.gov.in"
+    domains: [compliance]
+
+  dsci:
+    name: "Data Security Council of India"
+    authority_type: "industry_body"
+    trust_level: "secondary"
+    base_url: "https://www.dsci.in"
+    domains: [compliance]
+
+# ==============================================================================
+# SECTION 2 — TOPIC TAXONOMY
+# ==============================================================================
+# Every user-facing topic maps to at least one `primary_source`.
+# Retrieval layer must enforce: answer MUST cite one of the primary_sources.
+# ==============================================================================
+
+topics:
+
+  # ---------- MUTUAL FUNDS ----------
+  mutual_funds:
+    display_name: "Mutual Funds"
+    emoji: "📈"
+    primary_sources: [sebi, amfi]
+    secondary_sources: [mf_central, nism, ncfe]
+    disclaimer: investment
+    subtopics:
+
+      nav:
+        display_name: "Net Asset Value"
+        primary_source: amfi
+        data_endpoints: ["amfi.nav_all"]
+        regulation_refs:
+          - statute: "SEBI (Mutual Funds) Regulations, 1996"
+            provision: "Regulation 48 — NAV computation"
+          - statute: "SEBI Circular"
+            provision: "Applicable NAV rules (effective 01-Feb-2021)"
+
+      sip:
+        display_name: "Systematic Investment Plan"
+        primary_source: amfi
+        secondary_source: sebi
+
+      categorization:
+        display_name: "Scheme Categories (Equity / Debt / Hybrid / Solution / Other)"
+        primary_source: sebi
+        regulation_refs:
+          - statute: "SEBI Circular"
+            provision: "SEBI/HO/IMD/DF3/CIR/P/2017/114 — Categorization and Rationalization of MF Schemes"
+            date: "2017-10-06"
+
+      expense_ratio:
+        display_name: "Expense Ratio / TER"
+        primary_source: sebi
+        regulation_refs:
+          - statute: "SEBI (Mutual Funds) Regulations, 1996"
+            provision: "Regulation 52 — Limitation on fees and expenses"
+
+      elss:
+        display_name: "Equity Linked Savings Scheme"
+        primary_source: income_tax_india
+        secondary_source: amfi
+        regulation_refs:
+          - statute: "Income Tax Act, 1961"
+            provision: "Section 80C (Old Regime only)"
+          - statute: "ELSS Lock-in"
+            provision: "3 years statutory lock-in"
+
+      taxation:
+        display_name: "Taxation of Mutual Fund gains"
+        primary_source: income_tax_india
+        secondary_source: amfi
+        disclaimer: tax
+        regulation_refs:
+          - statute: "Income Tax Act, 1961"
+            provision: "Section 112A (Equity LTCG), Section 111A (Equity STCG)"
+          - statute: "Finance Act, 2024"
+            provision: "Equity STCG raised to 20%, LTCG to 12.5% above ₹1.25L"
+            effective_from: "2024-07-23"
+          - statute: "Finance Act, 2023"
+            provision: "Debt MF indexation removed for units bought on/after 01-Apr-2023"
+
+      kyc:
+        display_name: "KYC for mutual fund investments"
+        primary_source: sebi
+        secondary_source: amfi
+
+      direct_vs_regular:
+        display_name: "Direct Plan vs Regular Plan"
+        primary_source: sebi
+        secondary_source: amfi
+
+      exit_load:
+        display_name: "Exit Load"
+        primary_source: sebi
+        secondary_source: amfi
+
+      riskometer:
+        display_name: "Riskometer"
+        primary_source: sebi
+
+      nfo:
+        display_name: "New Fund Offer"
+        primary_source: sebi
+        secondary_source: amfi
+
+  # ---------- INSURANCE ----------
+  insurance:
+    display_name: "Insurance"
+    emoji: "🛡️"
+    primary_sources: [irdai, policyholder_gov, cio]
+    secondary_sources: [iib, life_insurance_council, general_insurance_council]
+    disclaimer: insurance
+    subtopics:
+
+      term_insurance:
+        display_name: "Term Life Insurance"
+        primary_source: policyholder_gov
+        secondary_source: irdai
+
+      ulip:
+        display_name: "Unit Linked Insurance Plans"
+        primary_source: irdai
+        regulation_refs:
+          - statute: "IRDAI (Unit Linked Insurance Products) Regulations, 2019"
+
+      health_insurance:
+        display_name: "Health Insurance"
+        primary_source: irdai
+        regulation_refs:
+          - statute: "IRDAI (Health Insurance) Regulations, 2016"
+          - statute: "IRDAI Master Circular on Health Insurance"
+            date: "2024-05-29"
+
+      motor_insurance:
+        display_name: "Motor Insurance"
+        primary_source: irdai
+        regulation_refs:
+          - statute: "Motor Vehicles Act, 1988"
+            provision: "Sections 146-150 (Compulsory TP cover)"
+
+      claims_process:
+        display_name: "Insurance Claims Process"
+        primary_source: policyholder_gov
+        secondary_source: irdai
+
+      free_look_period:
+        display_name: "Free Look Period"
+        primary_source: irdai
+        regulation_refs:
+          - provision: "Minimum 30 days (revised from 15 days) per IRDAI circular"
+            effective_from: "2024-04-01"
+
+      grievance:
+        display_name: "Grievance Redressal"
+        primary_source: bima_bharosa
+        secondary_source: irdai
+
+      ombudsman:
+        display_name: "Insurance Ombudsman"
+        primary_source: cio
+        regulation_refs:
+          - statute: "Insurance Ombudsman Rules, 2017"
+            provision: "Jurisdiction up to ₹50 lakh"
+
+      bima_sugam:
+        display_name: "Bima Sugam (insurance marketplace)"
+        primary_source: irdai
+
+  # ---------- IPO ----------
+  ipo:
+    display_name: "Initial Public Offering"
+    emoji: "📋"
+    primary_sources: [sebi]
+    secondary_sources: [nse, bse, nsdl, cdsl]
+    disclaimer: investment
+    subtopics:
+
+      process:
+        display_name: "IPO Process (DRHP → RHP → Listing)"
+        primary_source: sebi
+        regulation_refs:
+          - statute: "SEBI (ICDR) Regulations, 2018"
+            provision: "Chapter II — Public Offerings"
+
+      asba:
+        display_name: "Application Supported by Blocked Amount"
+        primary_source: sebi
+        regulation_refs:
+          - statute: "SEBI Circular"
+            provision: "Mandatory ASBA for all applicants"
+
+      upi_mandate:
+        display_name: "UPI for retail IPO applications"
+        primary_source: sebi
+        secondary_source: npci
+        regulation_refs:
+          - provision: "UPI ASBA mandatory for retail applicants ≤ ₹5 lakh"
+
+      eligibility:
+        display_name: "IPO Investor Categories (Retail / NII / QIB)"
+        primary_source: sebi
+        regulation_refs:
+          - statute: "SEBI (ICDR) Regulations, 2018"
+            provision: "Regulation 32 — Allocation"
+
+      allotment:
+        display_name: "Allotment Process & Basis"
+        primary_source: sebi
+        secondary_source: nse
+
+      book_building:
+        display_name: "Book Building Process"
+        primary_source: sebi
+
+      sme_ipo:
+        display_name: "SME IPO"
+        primary_source: sebi
+        secondary_source: nse
+
+      drhp:
+        display_name: "Draft Red Herring Prospectus"
+        primary_source: sebi
+
+  # ---------- STOCKS ----------
+  stocks:
+    display_name: "Stock Market"
+    emoji: "📊"
+    primary_sources: [sebi]
+    secondary_sources: [nse, bse, nsdl, cdsl, nism, ncfe]
+    disclaimer: investment
+    subtopics:
+
+      market_basics:
+        display_name: "Market Basics (BSE / NSE / SENSEX / NIFTY)"
+        primary_source: sebi
+        secondary_source: nse
+
+      demat:
+        display_name: "Demat Account"
+        primary_source: sebi
+        secondary_source: nsdl
+
+      settlement:
+        display_name: "Settlement Cycle (T+1, Optional T+0)"
+        primary_source: sebi
+        regulation_refs:
+          - provision: "T+1 for all equity scrips (effective 27-Jan-2023)"
+          - provision: "Optional T+0 settlement (phased rollout from 28-Mar-2024)"
+
+      order_types:
+        display_name: "Order Types (Market / Limit / Stop Loss / SL-M)"
+        primary_source: sebi
+        secondary_source: nse
+
+      fno:
+        display_name: "Futures and Options"
+        primary_source: sebi
+        disclaimer: investment
+        regulation_refs:
+          - statute: "SEBI Circular"
+            provision: "F&O framework strengthening measures"
+            date: "2024-10-01"
+
+      circuit_breakers:
+        display_name: "Circuit Breakers"
+        primary_source: sebi
+        secondary_source: nse
+
+      insider_trading:
+        display_name: "Insider Trading"
+        primary_source: sebi
+        regulation_refs:
+          - statute: "SEBI (Prohibition of Insider Trading) Regulations, 2015"
+
+      scores:
+        display_name: "SCORES — Investor Grievance"
+        primary_source: sebi
+
+      investor_protection:
+        display_name: "Investor Protection Fund"
+        primary_source: sebi
+        secondary_source: nse
+
+  # ---------- INCOME TAX ----------
+  income_tax:
+    display_name: "Income Tax FY 2025-26"
+    emoji: "💰"
+    primary_sources: [income_tax_india, cbdt, mof, india_code]
+    secondary_sources: [income_tax_filing]
+    disclaimer: tax
+    subtopics:
+
+      regime_comparison:
+        display_name: "Old vs New Regime"
+        primary_source: income_tax_india
+        regulation_refs:
+          - statute: "Income Tax Act, 1961"
+            provision: "Section 115BAC — New Tax Regime (default)"
+          - statute: "Finance Act, 2024"
+            provision: "Revised slabs and ₹75,000 standard deduction under New Regime"
+
+      section_80c:
+        display_name: "Section 80C Deductions"
+        primary_source: income_tax_india
+        regulation_refs:
+          - statute: "Income Tax Act, 1961"
+            provision: "Section 80C — up to ₹1.5 lakh (Old Regime only)"
+
+      section_80d:
+        display_name: "Section 80D — Health Insurance"
+        primary_source: income_tax_india
+        regulation_refs:
+          - statute: "Income Tax Act, 1961"
+            provision: "Section 80D"
+
+      nps_80ccd:
+        display_name: "NPS — Sections 80CCD(1), 80CCD(1B), 80CCD(2)"
+        primary_source: income_tax_india
+
+      hra:
+        display_name: "House Rent Allowance"
+        primary_source: income_tax_india
+        regulation_refs:
+          - statute: "Income Tax Act, 1961"
+            provision: "Section 10(13A)"
+
+      capital_gains_equity:
+        display_name: "Capital Gains — Equity"
+        primary_source: income_tax_india
+        regulation_refs:
+          - statute: "Income Tax Act, 1961"
+            provision: "Section 111A (STCG 20%), Section 112A (LTCG 12.5%)"
+          - statute: "Finance Act, 2024"
+            effective_from: "2024-07-23"
+
+      capital_gains_debt:
+        display_name: "Capital Gains — Debt"
+        primary_source: income_tax_india
+        regulation_refs:
+          - statute: "Finance Act, 2023"
+            provision: "Debt MF — slab rate, no indexation (purchases on/after 01-Apr-2023)"
+
+      capital_gains_realestate:
+        display_name: "Capital Gains — Real Estate"
+        primary_source: income_tax_india
+        regulation_refs:
+          - statute: "Finance Act, 2024"
+            provision: "LTCG 12.5% without indexation; grandfathering option for pre-23-Jul-2024 purchases"
+
+      capital_gains_crypto:
+        display_name: "Capital Gains — Virtual Digital Assets"
+        primary_source: income_tax_india
+        regulation_refs:
+          - statute: "Income Tax Act, 1961"
+            provision: "Section 115BBH — 30% flat; 1% TDS under Section 194S"
+
+      itr_filing:
+        display_name: "ITR Filing"
+        primary_source: income_tax_filing
+        secondary_source: income_tax_india
+
+      standard_deduction:
+        display_name: "Standard Deduction"
+        primary_source: income_tax_india
+        regulation_refs:
+          - provision: "₹75,000 (New Regime), ₹50,000 (Old Regime) — Finance Act 2024"
+
+  # ---------- COMPLIANCE ----------
+  compliance:
+    display_name: "Regulatory Compliance"
+    emoji: "🔒"
+    primary_sources: [rbi, cert_in, meity, pci_ssc]
+    secondary_sources: [npci, nciipc, dsci]
+    subtopics:
+
+      rbi_csf:
+        display_name: "RBI Cyber Security Framework"
+        primary_source: rbi
+        regulation_refs:
+          - statute: "RBI Circular"
+            provision: "Cyber Security Framework in Banks"
+            date: "2016-06-02"
+            reference: "DBS.CO/CSITE/BC.11/33.01.001/2015-16"
+
+      rbi_itf_nbfc:
+        display_name: "RBI IT Framework for NBFCs"
+        primary_source: rbi
+        regulation_refs:
+          - statute: "RBI Master Direction"
+            provision: "Information Technology Governance, Risk, Controls and Assurance Practices"
+            date: "2023-11-07"
+
+      digital_lending:
+        display_name: "Digital Lending Guidelines"
+        primary_source: rbi
+        regulation_refs:
+          - statute: "RBI Guidelines on Digital Lending"
+            date: "2022-09-02"
+
+      certin_6hour:
+        display_name: "CERT-In 6-Hour Incident Reporting Directive"
+        primary_source: cert_in
+        regulation_refs:
+          - statute: "CERT-In Directions"
+            provision: "Section 70B(6) IT Act — 6-hour reporting"
+            date: "2022-04-28"
+
+      certin_soc_audit:
+        display_name: "CERT-In Empanelled Auditor Requirements"
+        primary_source: cert_in
+
+      pci_dss:
+        display_name: "PCI-DSS v4.0"
+        primary_source: pci_ssc
+        regulation_refs:
+          - standard: "PCI-DSS v4.0"
+            effective_from: "2024-03-31"
+            notes: "v4.0.1 published June 2024"
+
+      dpdp_act:
+        display_name: "Digital Personal Data Protection Act 2023"
+        primary_source: meity
+        regulation_refs:
+          - statute: "DPDP Act, 2023"
+            url: "https://www.meity.gov.in/writereaddata/files/Digital%20Personal%20Data%20Protection%20Act%202023.pdf"
+
+      it_act_2000:
+        display_name: "Information Technology Act 2000"
+        primary_source: meity
+
+      kyc_pmla:
+        display_name: "KYC / AML under PMLA"
+        primary_source: rbi
+        regulation_refs:
+          - statute: "RBI Master Direction"
+            provision: "Know Your Customer (KYC) Direction, 2016"
+          - statute: "Prevention of Money Laundering Act, 2002"
+
+      upi_compliance:
+        display_name: "UPI Technical & Risk Standards"
+        primary_source: npci
+        secondary_source: rbi
+
+# ==============================================================================
+# SECTION 3 — BOT ENFORCEMENT POLICY
+# ==============================================================================
+# The retrieval layer MUST enforce these rules.
+# ==============================================================================
+
+policy:
+  require_citation: true
+  min_primary_sources_per_answer: 1
+  allowed_trust_levels_for_citation: [primary]
+  secondary_allowed_as_supplement: true
+  max_content_age_days: 365
+  must_include_disclaimer: true
+  reject_if_no_primary_source: true
+
+  disclaimers:
+    investment: >
+      This is general educational information, not personalised investment advice.
+      Investments in securities are subject to market risks. Read all scheme-related
+      documents carefully before investing. Consult a SEBI-registered Investment
+      Adviser (RIA) for decisions specific to your situation.
+
+    tax: >
+      This reflects tax rules for FY 2025-26 as per Finance Act 2024. Tax law changes
+      frequently and applies differently to individual circumstances. Consult a
+      Chartered Accountant for personalised tax planning.
+
+    insurance: >
+      Insurance is a contract of indemnity and should be chosen based on individual
+      needs, risk profile, and policy terms. Consult an IRDAI-licensed insurance
+      intermediary and read the policy wordings before buying.
+
+    compliance: >
+      Regulatory text reproduced here is for information only. For statutory
+      compliance, always refer to the official gazette notification or the
+      regulator's website directly.
+
+  red_flags:
+    # Phrases that should trigger review — bot should NOT give answers that
+    # cross into personalised advice without a human-in-loop or proper RIA cover.
+    - "should I buy"
+    - "which fund is best for me"
+    - "which policy should I take"
+    - "guaranteed returns"
+    - "risk-free"
+    - "will this stock go up"
+
+# ==============================================================================
+# END OF SCHEMA
+# ==============================================================================

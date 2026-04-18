@@ -1,0 +1,159 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BFSI Advisor Source Catalog Schema",
+  "description": "Validation schema for bfsi_sources.yaml — enforces structure of source catalog, topic taxonomy, and policy rules.",
+  "type": "object",
+  "required": ["meta", "sources", "topics", "policy"],
+  "properties": {
+
+    "meta": {
+      "type": "object",
+      "required": ["version", "last_updated", "jurisdiction", "fiscal_year"],
+      "properties": {
+        "version":      { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+        "last_updated": { "type": "string", "format": "date" },
+        "jurisdiction": { "type": "string" },
+        "fiscal_year":  { "type": "string" },
+        "schema_spec":  { "type": "string" }
+      }
+    },
+
+    "sources": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-z][a-z0-9_]*$": {
+          "type": "object",
+          "required": ["name", "authority_type", "trust_level", "base_url", "domains"],
+          "properties": {
+            "name":            { "type": "string" },
+            "authority_type":  {
+              "type": "string",
+              "enum": [
+                "regulator", "sro", "government", "exchange",
+                "depository", "service_portal", "education",
+                "regulator_portal", "statutory_body", "industry_body",
+                "standards_body"
+              ]
+            },
+            "trust_level":     { "type": "string", "enum": ["primary", "secondary", "reference"] },
+            "parent_regulator": { "type": "string" },
+            "parent":           { "type": "string" },
+            "statute_basis":    { "type": "string" },
+            "jurisdiction":     { "type": "string" },
+            "base_url":         { "type": "string", "format": "uri" },
+            "domains": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "mutual_funds", "insurance", "ipo", "stocks",
+                  "income_tax", "compliance", "banking", "multi_regulator"
+                ]
+              },
+              "minItems": 1
+            },
+            "key_pages": {
+              "type": "object",
+              "additionalProperties": { "type": "string", "format": "uri" }
+            },
+            "citation_templates": {
+              "type": "object",
+              "properties": {
+                "formal":   { "type": "string" },
+                "inline":   { "type": "string" },
+                "chatbot":  { "type": "string" },
+                "footnote": { "type": "string" }
+              }
+            },
+            "data_endpoints": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["id", "url"],
+                "properties": {
+                  "id":               { "type": "string" },
+                  "description":      { "type": "string" },
+                  "url":              { "type": "string", "format": "uri" },
+                  "format":           { "type": "string" },
+                  "columns":          { "type": "array", "items": { "type": "string" } },
+                  "update_frequency": { "type": "string" },
+                  "auth_required":    { "type": "boolean" },
+                  "terms":            { "type": "string" },
+                  "rate_limit":       { "type": "string" },
+                  "max_range_days":   { "type": "integer" }
+                }
+              }
+            },
+            "purpose": { "type": "string" },
+            "notes":   { "type": "string" }
+          }
+        }
+      }
+    },
+
+    "topics": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-z][a-z0-9_]*$": {
+          "type": "object",
+          "required": ["display_name", "primary_sources", "subtopics"],
+          "properties": {
+            "display_name":      { "type": "string" },
+            "emoji":             { "type": "string" },
+            "primary_sources":   { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+            "secondary_sources": { "type": "array", "items": { "type": "string" } },
+            "disclaimer":        { "type": "string" },
+            "subtopics": {
+              "type": "object",
+              "patternProperties": {
+                "^[a-z][a-z0-9_]*$": {
+                  "type": "object",
+                  "required": ["display_name", "primary_source"],
+                  "properties": {
+                    "display_name":     { "type": "string" },
+                    "primary_source":   { "type": "string" },
+                    "secondary_source": { "type": "string" },
+                    "disclaimer":       { "type": "string" },
+                    "data_endpoints":   { "type": "array", "items": { "type": "string" } },
+                    "regulation_refs": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "statute":        { "type": "string" },
+                          "standard":       { "type": "string" },
+                          "provision":      { "type": "string" },
+                          "date":           { "type": "string", "format": "date" },
+                          "effective_from": { "type": "string", "format": "date" },
+                          "reference":      { "type": "string" },
+                          "url":            { "type": "string", "format": "uri" },
+                          "notes":          { "type": "string" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "policy": {
+      "type": "object",
+      "required": ["require_citation", "min_primary_sources_per_answer", "disclaimers"],
+      "properties": {
+        "require_citation":                    { "type": "boolean" },
+        "min_primary_sources_per_answer":      { "type": "integer", "minimum": 1 },
+        "allowed_trust_levels_for_citation":   { "type": "array", "items": { "type": "string" } },
+        "secondary_allowed_as_supplement":     { "type": "boolean" },
+        "max_content_age_days":                { "type": "integer" },
+        "must_include_disclaimer":             { "type": "boolean" },
+        "reject_if_no_primary_source":         { "type": "boolean" },
+        "disclaimers":                         { "type": "object", "additionalProperties": { "type": "string" } },
+        "red_flags":                           { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}
