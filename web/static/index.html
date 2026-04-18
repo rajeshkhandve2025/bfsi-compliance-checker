@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BFSI Advisory Assistant</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <div class="layout">
+
+    <!-- ── Sidebar ───────────────────────────────────────────────────── -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <span class="brand-icon">🏦</span>
+        <div>
+          <div class="brand-name">BFSI Advisor</div>
+          <div class="brand-sub">AI-Powered Assistant</div>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="section-label">Quick Questions</div>
+
+        <div class="quick-group">
+          <div class="quick-group-title">💰 Tax</div>
+          <button class="quick-btn" onclick="ask('I earn ₹15 lakh. Compare Old vs New tax regime for me.')">Old vs New regime — ₹15L income</button>
+          <button class="quick-btn" onclick="ask('Explain Section 80C deductions for FY 2025-26.')">Section 80C explained</button>
+          <button class="quick-btn" onclick="ask('What is the capital gains tax on equity mutual funds?')">Capital gains on equity MF</button>
+        </div>
+
+        <div class="quick-group">
+          <div class="quick-group-title">📈 Mutual Funds</div>
+          <button class="quick-btn" onclick="ask('What is NAV in mutual funds? Explain simply.')">What is NAV?</button>
+          <button class="quick-btn" onclick="ask('How does SIP work? What are the benefits?')">How does SIP work?</button>
+          <button class="quick-btn" onclick="ask('List all SEBI mutual fund categories.')">SEBI MF categories</button>
+        </div>
+
+        <div class="quick-group">
+          <div class="quick-group-title">🛡️ Insurance</div>
+          <button class="quick-btn" onclick="ask('What is the difference between Term and ULIP insurance?')">Term vs ULIP</button>
+          <button class="quick-btn" onclick="ask('What is Claim Settlement Ratio and why does it matter?')">Claim Settlement Ratio</button>
+          <button class="quick-btn" onclick="ask('Explain IRDAI free look period rule.')">Free look period</button>
+        </div>
+
+        <div class="quick-group">
+          <div class="quick-group-title">📋 IPO</div>
+          <button class="quick-btn" onclick="ask('How do I apply for an IPO? Explain step by step.')">How to apply for IPO</button>
+          <button class="quick-btn" onclick="ask('What is ASBA in IPO?')">What is ASBA?</button>
+          <button class="quick-btn" onclick="ask('What is the retail investor limit in an IPO?')">Retail investor limit</button>
+        </div>
+
+        <div class="quick-group">
+          <div class="quick-group-title">📊 Stocks</div>
+          <button class="quick-btn" onclick="ask('How does the Indian stock market work? Explain for a beginner.')">Stock market basics</button>
+          <button class="quick-btn" onclick="ask('What is P/E ratio and how do I use it?')">What is P/E ratio?</button>
+          <button class="quick-btn" onclick="ask('What is F&O trading? Is it risky?')">What is F&O trading?</button>
+        </div>
+
+        <div class="quick-group">
+          <div class="quick-group-title">🔒 Compliance</div>
+          <button class="quick-btn" onclick="ask('What does RBI CSF control RBI-CSF-2.1 require?')">RBI CSF 2.1 — Network Security</button>
+          <button class="quick-btn" onclick="ask('What is the CERT-In 6-hour incident reporting rule?')">CERT-In incident reporting</button>
+          <button class="quick-btn" onclick="ask('What does PCI-DSS require for MFA?')">PCI-DSS MFA requirement</button>
+        </div>
+      </div>
+
+      <button class="new-chat-btn" onclick="newChat()">+ New Chat</button>
+    </aside>
+
+    <!-- ── Main chat area ─────────────────────────────────────────────── -->
+    <main class="chat-main">
+      <header class="chat-header">
+        <div class="header-title">BFSI Advisory Assistant</div>
+        <div class="header-sub">Mutual Funds · Insurance · IPO · Stocks · Tax · Compliance</div>
+      </header>
+
+      <div class="messages" id="messages">
+        <div class="message assistant">
+          <div class="avatar">AI</div>
+          <div class="bubble">
+            <p>Hello! I'm your BFSI Advisory Assistant. I can help you with:</p>
+            <ul>
+              <li>📈 <strong>Mutual Funds</strong> — NAV, SIP, categories, expense ratio, tax</li>
+              <li>🛡️ <strong>Insurance</strong> — Term, ULIP, Health, Motor, IRDAI regulations</li>
+              <li>📋 <strong>IPO</strong> — Process, ASBA, eligibility, allotment</li>
+              <li>📊 <strong>Stocks</strong> — Market basics, SEBI rules, order types, F&O</li>
+              <li>💰 <strong>Income Tax FY 2025-26</strong> — Old vs New regime, 80C, capital gains</li>
+              <li>🔒 <strong>Compliance</strong> — RBI CSF, CERT-In, PCI-DSS</li>
+            </ul>
+            <p>Use the quick questions on the left or type your question below.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-area">
+        <div class="input-row">
+          <textarea
+            id="user-input"
+            placeholder="Ask anything about banking, finance, or compliance…"
+            rows="1"
+            onkeydown="handleKey(event)"
+            oninput="autoResize(this)"
+          ></textarea>
+          <button class="send-btn" id="send-btn" onclick="sendMessage()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </div>
+        <div class="input-footer">
+          For informational purposes only · Not personalised financial advice · Consult a qualified professional
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

@@ -17,6 +17,13 @@ dev = [
     "pytest>=8.0.0",
     "pytest-asyncio>=0.23.0",
 ]
+web = [
+    "fastapi>=0.111.0",
+    "uvicorn>=0.30.0",
+    "anthropic>=0.34.0",
+    "python-dotenv>=1.0.0",
+    "python-multipart>=0.0.9",
+]
 
 [project.scripts]
 bfsi-compliance = "bfsi_compliance.server:main"
