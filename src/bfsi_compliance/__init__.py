@@ -1,0 +1,1 @@
+"""BFSI Compliance Checker — MCP Server."""

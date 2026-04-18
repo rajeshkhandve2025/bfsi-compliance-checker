@@ -1,0 +1,80 @@
+{
+  "framework": "CERT-In Directions",
+  "version": "April 2022 (effective 27 June 2022)",
+  "issuer": "Indian Computer Emergency Response Team, Ministry of Electronics and IT",
+  "applicability": "All entities operating in India including service providers, intermediaries, data centres, government organisations",
+  "directives": [
+    {
+      "id": "CERTIN-1",
+      "title": "Mandatory Cyber Incident Reporting",
+      "deadline_hours": 6,
+      "description": "Any cyber incident must be reported to CERT-In within 6 hours of noticing it or being informed about it.",
+      "covered_incident_types": [
+        "Targeted scanning/probing of critical networks/systems",
+        "Compromise of critical systems/information",
+        "Unauthorised access to IT systems/data",
+        "Defacement of website or intrusion into a website",
+        "Malicious code attacks (virus, worm, Trojan, ransomware, spyware)",
+        "Attacks on critical infrastructure, SCADA, OT systems",
+        "Attacks on Internet of Things (IoT) devices",
+        "DDoS attacks",
+        "DNS and BGP hijacking",
+        "Data breach/theft",
+        "Identity theft and fraud"
+      ],
+      "reporting_portal": "https://www.cert-in.org.in",
+      "evidence": ["Incident report submitted to CERT-In", "Submission acknowledgement", "Internal incident log with detection timestamp"]
+    },
+    {
+      "id": "CERTIN-2",
+      "title": "Synchronisation with NTP",
+      "description": "All ICT infrastructure must synchronise system clocks with the National Physical Laboratory (NPL) NTP server or NIC NTP server.",
+      "ntp_servers": [
+        "time.nplindia.org",
+        "time.nic.in"
+      ],
+      "requirement": "Logs and timestamps used in investigations must be correlated with NPL/NIC time sources.",
+      "evidence": ["NTP configuration screenshots", "Chrony/NTPd config files", "Clock sync status reports"]
+    },
+    {
+      "id": "CERTIN-3",
+      "title": "Log Retention",
+      "retention_period_months": 180,
+      "description": "All ICT systems must maintain logs for a minimum of 180 days (6 months). Logs must be available within India.",
+      "log_types_required": [
+        "System logs",
+        "Network device logs",
+        "Security device logs",
+        "Application logs",
+        "DNS logs",
+        "Firewall logs",
+        "Proxy logs",
+        "Virtual private network logs"
+      ],
+      "data_residency": "India",
+      "evidence": ["Log retention policy", "SIEM/log management system proof", "Storage capacity report"]
+    },
+    {
+      "id": "CERTIN-4",
+      "title": "Designated Point of Contact",
+      "description": "All entities must designate a Point of Contact (PoC) to coordinate with CERT-In. PoC details must be registered on the CERT-In portal.",
+      "requirement": "PoC must be reachable 24x7. Any change in PoC must be notified within 7 days.",
+      "evidence": ["CERT-In portal PoC registration screenshot", "PoC contact card", "Change notification procedure"]
+    },
+    {
+      "id": "CERTIN-5",
+      "title": "VPN and Virtual Asset Provider Logs",
+      "description": "VPN service providers, Virtual Asset Service Providers (VASPs), and Virtual Private Server (VPS) providers must maintain logs of all transactions for 5 years.",
+      "retention_period_years": 5,
+      "kyc_requirement": "Validated customer details (KYC) must be maintained for all users.",
+      "evidence": ["VPN/VPS transaction logs", "KYC records", "Data retention policy"]
+    },
+    {
+      "id": "CERTIN-6",
+      "title": "Vulnerability Disclosure and Threat Intelligence",
+      "description": "Entities must share information with CERT-In on cyber threats, vulnerabilities, and incidents as required.",
+      "requirement": "Entities must implement a vulnerability disclosure policy and act on CERT-In advisories within specified timelines.",
+      "evidence": ["Vulnerability disclosure policy", "CERT-In advisory tracking log", "Remediation records"]
+    }
+  ]
+}

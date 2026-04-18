@@ -1,0 +1,185 @@
+{
+  "framework": "PCI DSS",
+  "version": "4.0",
+  "issuer": "Payment Card Industry Security Standards Council (PCI SSC)",
+  "applicability": "Any entity that stores, processes, or transmits cardholder data (CHD) or sensitive authentication data (SAD)",
+  "requirements": [
+    {
+      "id": "PCI-1",
+      "number": "1",
+      "title": "Install and Maintain Network Security Controls",
+      "description": "Network security controls (NSCs) such as firewalls must be installed and configured to restrict inbound and outbound traffic to only what is necessary.",
+      "sub_requirements": [
+        "1.1 - Processes and mechanisms for installing and maintaining NSCs are defined and understood",
+        "1.2 - NSCs between trusted and untrusted networks are implemented",
+        "1.3 - Network access to and from the cardholder data environment is restricted",
+        "1.4 - Network connections between trusted and untrusted networks are controlled",
+        "1.5 - Risks to the CDE from computing devices able to connect to both untrusted networks and the CDE are mitigated"
+      ],
+      "evidence": ["Firewall rule sets", "Network diagram showing CDE", "NSC change management records"]
+    },
+    {
+      "id": "PCI-2",
+      "number": "2",
+      "title": "Apply Secure Configurations to All System Components",
+      "description": "Malicious individuals often use vendor default passwords and other vendor default settings to compromise systems. Default credentials must be changed before deploying any system.",
+      "sub_requirements": [
+        "2.1 - Processes for managing all system components default security parameters are defined and understood",
+        "2.2 - System components are configured and managed securely",
+        "2.3 - Wireless environments are configured and managed securely"
+      ],
+      "evidence": ["Hardening standards documents", "Configuration baseline scans", "CIS benchmark reports"]
+    },
+    {
+      "id": "PCI-3",
+      "number": "3",
+      "title": "Protect Stored Account Data",
+      "description": "Protection methods such as encryption, truncation, masking, and hashing are critical components of cardholder data protection.",
+      "sub_requirements": [
+        "3.1 - Processes for protecting stored account data are defined and understood",
+        "3.2 - Storage of account data is kept to a minimum",
+        "3.3 - Sensitive authentication data (SAD) is not retained after authorisation",
+        "3.4 - Access to displays of full PAN and ability to copy PAN is restricted",
+        "3.5 - Primary account number (PAN) is secured wherever it is stored",
+        "3.6 - Cryptographic keys used to protect stored account data are secured",
+        "3.7 - Where cryptography is used to protect stored account data, key management processes and procedures are defined and implemented"
+      ],
+      "evidence": ["Data flow diagram", "Encryption key management policy", "Data discovery scan results", "Truncation/masking screenshots"]
+    },
+    {
+      "id": "PCI-4",
+      "number": "4",
+      "title": "Protect Cardholder Data with Strong Cryptography During Transmission",
+      "description": "Sensitive information must be encrypted during transmission over open, public networks.",
+      "sub_requirements": [
+        "4.1 - Processes for protecting cardholder data with strong cryptography during transmission are defined",
+        "4.2 - PAN is protected with strong cryptography during transmission"
+      ],
+      "allowed_protocols": ["TLS 1.2", "TLS 1.3"],
+      "prohibited_protocols": ["SSL", "TLS 1.0", "TLS 1.1", "WEP", "WPA"],
+      "evidence": ["SSL/TLS scan reports", "Certificate inventory", "Protocol configuration proof"]
+    },
+    {
+      "id": "PCI-5",
+      "number": "5",
+      "title": "Protect All Systems and Networks from Malicious Software",
+      "description": "Malicious software (malware) exploits system vulnerabilities. Anti-malware solutions must be deployed on all applicable components.",
+      "sub_requirements": [
+        "5.1 - Processes for protecting against malware are defined and understood",
+        "5.2 - Malware is prevented, or detected and addressed",
+        "5.3 - Anti-malware mechanisms and processes are active, maintained, and monitored",
+        "5.4 - Phishing and social engineering attacks are addressed"
+      ],
+      "evidence": ["Anti-malware deployment report", "Anti-malware policy", "Phishing simulation results"]
+    },
+    {
+      "id": "PCI-6",
+      "number": "6",
+      "title": "Develop and Maintain Secure Systems and Software",
+      "description": "Unscrupulous individuals use security vulnerabilities to gain privileged access to systems. Security vulnerabilities are fixed via security patches.",
+      "sub_requirements": [
+        "6.1 - Processes for developing and maintaining secure systems and software are defined",
+        "6.2 - Bespoke and custom software are developed securely",
+        "6.3 - Security vulnerabilities are identified and addressed",
+        "6.4 - Public-facing web applications are protected against attacks",
+        "6.5 - Changes to all system components are managed securely"
+      ],
+      "evidence": ["SAST/DAST reports", "WAF configuration", "Patch policy and patch records", "Change management log"]
+    },
+    {
+      "id": "PCI-7",
+      "number": "7",
+      "title": "Restrict Access to System Components and Cardholder Data by Business Need to Know",
+      "description": "Access to system components and cardholder data should be limited to only those individuals whose job requires such access.",
+      "sub_requirements": [
+        "7.1 - Processes for restricting access to system components and cardholder data are defined and understood",
+        "7.2 - Access to system components and data is appropriately defined and assigned",
+        "7.3 - Access to system components and data is managed via an access control system"
+      ],
+      "evidence": ["Role-based access control matrix", "Access review records", "IAM policy screenshots"]
+    },
+    {
+      "id": "PCI-8",
+      "number": "8",
+      "title": "Identify Users and Authenticate Access to System Components",
+      "description": "Two methods of authentication are required for all access to the CDE. MFA is mandatory.",
+      "sub_requirements": [
+        "8.1 - Processes for identifying and authenticating users are defined and understood",
+        "8.2 - User identification and related accounts are managed throughout the user lifecycle",
+        "8.3 - User authentication for users and administrators is established and managed",
+        "8.4 - MFA is implemented to secure access into the CDE",
+        "8.5 - MFA systems are configured to prevent misuse",
+        "8.6 - Use of application and system accounts is managed"
+      ],
+      "evidence": ["MFA deployment evidence", "Password policy", "Account management procedure", "Privileged access review"]
+    },
+    {
+      "id": "PCI-9",
+      "number": "9",
+      "title": "Restrict Physical Access to Cardholder Data",
+      "description": "Any physical access to data or systems that house cardholder data provides the opportunity for individuals to access devices or data.",
+      "sub_requirements": [
+        "9.1 - Processes and mechanisms for restricting physical access to cardholder data are defined and understood",
+        "9.2 - Physical access controls manage entry into facilities and systems containing cardholder data",
+        "9.3 - Physical access for personnel and visitors is authorised and managed",
+        "9.4 - Media with cardholder data is securely stored, accessed, distributed, and destroyed",
+        "9.5 - Point of interaction (POI) devices are protected from tampering and unauthorised substitution"
+      ],
+      "evidence": ["Physical access logs", "CCTV evidence", "Media destruction records", "POI inspection checklists"]
+    },
+    {
+      "id": "PCI-10",
+      "number": "10",
+      "title": "Log and Monitor All Access to System Components and Cardholder Data",
+      "description": "Logging mechanisms and the ability to track user activities are critical in preventing, detecting, or minimising the impact of a data compromise.",
+      "sub_requirements": [
+        "10.1 - Processes for logging and monitoring all access to system components and cardholder data are defined",
+        "10.2 - Audit logs capture all individual user access to cardholder data",
+        "10.3 - Audit logs are protected from destruction and unauthorised modifications",
+        "10.4 - Audit logs are reviewed to identify anomalies or suspicious activity",
+        "10.5 - Audit log history is retained and available for analysis",
+        "10.6 - Time-synchronisation mechanisms support consistent time settings across all systems",
+        "10.7 - Failures of critical security controls are detected, reported, and responded to promptly"
+      ],
+      "log_retention_minimum_months": 12,
+      "log_online_availability_months": 3,
+      "evidence": ["SIEM deployment evidence", "Log retention policy", "Log review procedures", "NTP configuration"]
+    },
+    {
+      "id": "PCI-11",
+      "number": "11",
+      "title": "Test Security of Systems and Networks Regularly",
+      "description": "Vulnerabilities are continuously discovered by malicious individuals and researchers. System components, processes, and custom and bespoke software should be tested frequently.",
+      "sub_requirements": [
+        "11.1 - Processes for regularly testing security of systems and networks are defined and understood",
+        "11.2 - Wireless access points are identified and monitored; unauthorised ones are addressed",
+        "11.3 - External and internal vulnerabilities are regularly identified, prioritised, and addressed",
+        "11.4 - External and internal penetration testing is regularly performed",
+        "11.5 - Network intrusions and unexpected file changes are detected and responded to",
+        "11.6 - Unauthorised changes on payment pages are detected and responded to"
+      ],
+      "pentest_frequency": "Annual minimum + after significant changes",
+      "vulnerability_scan_frequency": "Quarterly",
+      "evidence": ["Vulnerability scan reports", "Penetration test reports", "FIM deployment evidence", "Wireless scan results"]
+    },
+    {
+      "id": "PCI-12",
+      "number": "12",
+      "title": "Support Information Security with Organisational Policies and Programs",
+      "description": "A strong security policy sets the security tone for the whole entity and informs personnel what is expected of them.",
+      "sub_requirements": [
+        "12.1 - A comprehensive information security policy is known and current",
+        "12.2 - Acceptable use policies for end-user technologies are defined and implemented",
+        "12.3 - Risks to the CDE are formally identified, evaluated, and managed",
+        "12.4 - PCI DSS compliance is managed",
+        "12.5 - PCI DSS scope is documented and validated",
+        "12.6 - Security awareness education is ongoing",
+        "12.7 - Personnel are screened before engagement",
+        "12.8 - Risk associated with third-party service providers (TPSPs) is managed",
+        "12.9 - Third-party service providers support customers compliance",
+        "12.10 - Suspected and confirmed security incidents are responded to immediately"
+      ],
+      "evidence": ["Information security policy", "Risk register", "Security awareness training records", "TPSP inventory and attestations", "Incident response plan"]
+    }
+  ]
+}

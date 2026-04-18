@@ -1,0 +1,29 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "bfsi-compliance"
+version = "0.1.0"
+description = "MCP server exposing RBI CSF, CERT-In, and PCI-DSS compliance tools"
+requires-python = ">=3.11"
+dependencies = [
+    "mcp>=1.0.0",
+    "pydantic>=2.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+]
+
+[project.scripts]
+bfsi-compliance = "bfsi_compliance.server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/bfsi_compliance"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

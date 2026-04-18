@@ -1,0 +1,148 @@
+{
+  "framework": "RBI Cyber Security Framework",
+  "version": "2016 (updated 2021)",
+  "issuer": "Reserve Bank of India",
+  "applicability": "Scheduled Commercial Banks, NBFCs, Payment Banks, Small Finance Banks",
+  "domains": [
+    {
+      "id": "RBI-CSF-1",
+      "domain": "IT Governance",
+      "description": "Establish a Board-approved IT and Cyber Security Policy",
+      "controls": [
+        {
+          "id": "RBI-CSF-1.1",
+          "title": "Cyber Security Policy",
+          "requirement": "Banks must have a Board-approved Cyber Security Policy separate from IT policy, reviewed annually.",
+          "maturity_levels": ["Basic", "Intermediate", "Advanced"],
+          "evidence": ["Board-approved policy document", "Annual review minutes", "CISO sign-off"]
+        },
+        {
+          "id": "RBI-CSF-1.2",
+          "title": "CISO Appointment",
+          "requirement": "A dedicated Chief Information Security Officer (CISO) must be appointed and report directly to the Board or senior management.",
+          "maturity_levels": ["Basic", "Intermediate", "Advanced"],
+          "evidence": ["Appointment letter", "Org chart", "Reporting structure document"]
+        },
+        {
+          "id": "RBI-CSF-1.3",
+          "title": "IT Strategy Committee",
+          "requirement": "Board-level IT Strategy Committee to oversee IT-related matters including cyber security.",
+          "maturity_levels": ["Intermediate", "Advanced"],
+          "evidence": ["Committee charter", "Meeting minutes (quarterly)"]
+        }
+      ]
+    },
+    {
+      "id": "RBI-CSF-2",
+      "domain": "IT Infrastructure Security",
+      "description": "Secure the entire IT infrastructure including networks, endpoints, and data centres",
+      "controls": [
+        {
+          "id": "RBI-CSF-2.1",
+          "title": "Network Security",
+          "requirement": "Implement firewalls, IDS/IPS, network segmentation. DMZ mandatory for internet-facing systems.",
+          "maturity_levels": ["Basic", "Intermediate", "Advanced"],
+          "evidence": ["Network architecture diagram", "Firewall rule review", "Penetration test report"]
+        },
+        {
+          "id": "RBI-CSF-2.2",
+          "title": "Endpoint Security",
+          "requirement": "All endpoints must have updated anti-malware, DLP, and host-based firewalls. BYOD policy required.",
+          "maturity_levels": ["Basic", "Intermediate", "Advanced"],
+          "evidence": ["EDR deployment report", "BYOD policy", "Patch compliance dashboard"]
+        },
+        {
+          "id": "RBI-CSF-2.3",
+          "title": "Data Centre Security",
+          "requirement": "Physical and logical access controls for data centres. Biometric access, CCTV, and visitor logs mandatory.",
+          "maturity_levels": ["Basic", "Intermediate", "Advanced"],
+          "evidence": ["Access control logs", "CCTV footage retention policy", "Visitor register"]
+        },
+        {
+          "id": "RBI-CSF-2.4",
+          "title": "Patch Management",
+          "requirement": "Critical patches applied within 30 days; high-severity within 60 days. Tracked via a formal patch management process.",
+          "maturity_levels": ["Basic", "Intermediate", "Advanced"],
+          "evidence": ["Patch management policy", "Vulnerability scan reports", "Patching SLA report"]
+        }
+      ]
+    },
+    {
+      "id": "RBI-CSF-3",
+      "domain": "Cyber Security Operations",
+      "description": "Maintain a Security Operations Centre (SOC) and incident response capability",
+      "controls": [
+        {
+          "id": "RBI-CSF-3.1",
+          "title": "Security Operations Centre (SOC)",
+          "requirement": "24x7 SOC mandatory for large banks. Smaller banks may use shared/outsourced SOC with RBI approval.",
+          "maturity_levels": ["Intermediate", "Advanced"],
+          "evidence": ["SOC charter", "24x7 coverage roster", "SIEM deployment evidence"]
+        },
+        {
+          "id": "RBI-CSF-3.2",
+          "title": "Incident Response Plan",
+          "requirement": "Documented IRP with defined roles, escalation matrix, and testing (tabletop exercises) at least once a year.",
+          "maturity_levels": ["Basic", "Intermediate", "Advanced"],
+          "evidence": ["IRP document", "Tabletop exercise report", "Contact escalation matrix"]
+        },
+        {
+          "id": "RBI-CSF-3.3",
+          "title": "Cyber Incident Reporting to RBI",
+          "requirement": "Cyber incidents must be reported to RBI within 2-6 hours of detection depending on severity.",
+          "maturity_levels": ["Basic", "Intermediate", "Advanced"],
+          "evidence": ["Incident log with timestamps", "RBI reporting emails/portal submissions"]
+        }
+      ]
+    },
+    {
+      "id": "RBI-CSF-4",
+      "domain": "Application Security",
+      "description": "Secure all customer-facing and internal applications",
+      "controls": [
+        {
+          "id": "RBI-CSF-4.1",
+          "title": "Secure SDLC",
+          "requirement": "Security integrated into the software development lifecycle. SAST/DAST mandatory before production releases.",
+          "maturity_levels": ["Intermediate", "Advanced"],
+          "evidence": ["SAST tool reports", "DAST scan reports", "Code review checklists"]
+        },
+        {
+          "id": "RBI-CSF-4.2",
+          "title": "Internet Banking Security",
+          "requirement": "Multi-factor authentication for all internet banking transactions. SSL/TLS 1.2+ required.",
+          "maturity_levels": ["Basic", "Intermediate", "Advanced"],
+          "evidence": ["MFA implementation evidence", "SSL certificate scan", "Transaction logs"]
+        },
+        {
+          "id": "RBI-CSF-4.3",
+          "title": "API Security",
+          "requirement": "APIs must be authenticated (OAuth 2.0/API keys), rate-limited, and logged. Open Banking APIs must follow RBI API guidelines.",
+          "maturity_levels": ["Intermediate", "Advanced"],
+          "evidence": ["API inventory", "OAuth configuration", "API gateway logs"]
+        }
+      ]
+    },
+    {
+      "id": "RBI-CSF-5",
+      "domain": "Business Continuity & Resilience",
+      "description": "Ensure availability and recoverability of critical banking services",
+      "controls": [
+        {
+          "id": "RBI-CSF-5.1",
+          "title": "Business Continuity Plan (BCP)",
+          "requirement": "Board-approved BCP covering cyber scenarios. RTO and RPO defined for all critical systems.",
+          "maturity_levels": ["Basic", "Intermediate", "Advanced"],
+          "evidence": ["BCP document", "BCP test reports (annual)", "RTO/RPO matrix"]
+        },
+        {
+          "id": "RBI-CSF-5.2",
+          "title": "Cyber Resilience Testing",
+          "requirement": "Annual red team exercises and penetration testing. Results shared with RBI on request.",
+          "maturity_levels": ["Intermediate", "Advanced"],
+          "evidence": ["Red team exercise report", "Penetration test report", "Remediation tracker"]
+        }
+      ]
+    }
+  ]
+}
